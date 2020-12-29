@@ -28,6 +28,9 @@ func Start() {
 	r.HandleFunc("/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
 	r.HandleFunc("/token", handlers.TokenHandler)
 
+	// api
+	r.HandleFunc("/api/queue", handlers.QueueHandler).Methods(http.MethodGet)
+
 	log.Println("Listening on port " + port)
 	log.Fatal(http.ListenAndServe(port, r))
 }
