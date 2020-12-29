@@ -12,10 +12,6 @@ var r = mux.NewRouter()
 
 func Start() {
 	port := ":" + os.Getenv("PORT")
-	if port == ":" {
-		log.Fatal("please provide a PORT environment variable")
-	}
-
 	fileServer := http.FileServer(http.Dir("./static"))
 	// views
 	r.HandleFunc("/", handlers.HtmlHandler("index"))
