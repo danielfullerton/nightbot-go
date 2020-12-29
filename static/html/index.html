@@ -38,7 +38,7 @@
     <h2>Instructions</h2>
     <hr>
     <div class="row credentials-instructions">
-      <i>if you entered your Client ID and Client Secret as environment variables, please simply click "Use Environment Variables"</i>
+      <i>if you entered your Client ID and Client Secret as environment variables when starting NightBot Go, please simply click "Use Environment Variables"</i>
       <br>
       <ol>
         <li>Log in to the
@@ -46,11 +46,11 @@
         </li>
         <li>Click the "New App" button.</li>
         <li>
-          Enter <b>Nightbot Go</b> for the name, and <b>http://localhost:5775/token</b> in the "Redirect URIs" box. Then click "Submit".
-          <ul>
-            <li><i>the Redirect URI value you use may be different if you are running NightBot Go on a server or on a different port</i></li>
-            <li><i>the name you use for the application is not important - you can use any value</i></li>
-          </ul>
+          Enter <b>NightBot Go</b> for the name. <i>The name you use for the application is not important - you can use any value.</i>
+        </li>
+        <li>
+          Enter your NightBot Go URL in the Redirect URIs box with the endpoint "/token". For example, if you are running NightBot Go on your local
+          machine using port 5775, you would enter "http://localhost:5775/token".
           <img src="/static/assets/AddAnApplication.png" alt="Add An Application">
         </li>
         <li>Now click the pencil icon next to "NightBot Go" in the My Apps section, and click "New Secret" in the pop up box.</li>

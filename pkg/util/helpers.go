@@ -2,19 +2,22 @@ package util
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
 )
 
 var client = &http.Client{}
+var baseURL = os.Getenv("BASE_URL")
+var port = os.Getenv("PORT")
 
 func GetRedirectURI() string {
-	return fmt.Sprintf("http://localhost:%s/token", os.Getenv("PORT"))
+	return fmt.Sprintf("%s:%s/token", baseURL, port)
 }
 
 func GetCloseURI() string {
-	return fmt.Sprintf("http://localhost:%s/close", os.Getenv("PORT"))
+	return fmt.Sprintf("%s:%s/close", baseURL, port)
 }
 
 func AttemptToMakeAuthorizedAPICall(method, apiUrl, accessToken string) (*http.Response, error) {
@@ -33,4 +36,12 @@ func AttemptToMakeAuthorizedAPICall(method, apiUrl, accessToken string) (*http.R
 	}
 
 	return client.Do(request)
+}
+
+func KillIfEnvironmentVariablesNotSet() {
+	if
+		os.Getenv("BASE_URL") == "" ||
+		os.Getenv("PORT") == "" {
+		log.Fatal("Please provide at least the following environment variables: BASE_URL, PORT")
+	}
 }
