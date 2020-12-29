@@ -10,6 +10,9 @@ function submitCredentials() {
     clientId,
     clientSecret
   })
-    .then(console.log)
+    .then(r => {
+      const redirectUrl = r.data.redirectUrl;
+      window.location.replace(redirectUrl);
+    })
     .catch(console.error);
 }

@@ -9,6 +9,7 @@ import (
 )
 
 var r = mux.NewRouter()
+
 func Start() {
 	port := ":" + os.Getenv("PORT")
 	if port == ":" {
@@ -16,8 +17,16 @@ func Start() {
 	}
 
 	fileServer := http.FileServer(http.Dir("./static"))
+	// views
 	r.HandleFunc("/", handlers.HtmlHandler("index"))
+	r.HandleFunc("/close", handlers.HtmlHandler("close"))
+
+	// static
 	r.PathPrefix("/static").Handler(http.StripPrefix("/static/", fileServer))
+
+	// oauth handlers
+	r.HandleFunc("/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
+	r.HandleFunc("/token", handlers.TokenHandler)
 
 	log.Println("Listening on port " + port)
 	log.Fatal(http.ListenAndServe(port, r))
