@@ -1,0 +1,26 @@
+{
+  "name": "nightbot-go",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielfullerton/nightbot-go.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielfullerton/nightbot-go/issues"
+  },
+  "homepage": "https://github.com/danielfullerton/nightbot-go#readme",
+  "dependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0"
+  }
+}
