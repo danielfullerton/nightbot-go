@@ -15,9 +15,9 @@ export class Home extends Component<any, HomeState> {
     };
   }
 
-  submitCredentials(skipCredentials?: boolean) {
+  submitCredentials(skipCredentials: boolean) {
     const url = '/api/config/credentials' + (skipCredentials ? '?skipCredentials=1' : '');
-    const req = skipCredentials ? { clientId: this.state.clientId, clientSecret: this.state.clientSecret } : {};
+    const req = skipCredentials ? {} : { clientId: this.state.clientId, clientSecret: this.state.clientSecret };
     axios.post(url, req)
       .then(response => {
         const redirectUrl = response.data.redirectUrl;
@@ -60,7 +60,7 @@ export class Home extends Component<any, HomeState> {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => this.submitCredentials(true)}
+                onClick={() => this.submitCredentials(false)}
                 disabled={!(this.state.clientId || this.state.clientSecret)}>
                 Submit</button>
               <button
