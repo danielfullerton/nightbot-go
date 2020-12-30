@@ -52,6 +52,12 @@ module.exports = {
     clientLogLevel: 'silent',
     port: 4200,
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5775',
+        secure: false
+      }
+    }
   },
   resolve: {
     extensions: ['.ts', '.js', '.jsx', '.tsx']

@@ -15,12 +15,9 @@ func Start() {
 	staticFileServer := http.FileServer(http.Dir("./dist/assets"))
 	distFileServer := http.FileServer(http.Dir("./dist"))
 
-	// views
-	//r.HandleFunc("/", handlers.HtmlHandler)
-
 	// oauth handlers
-	r.HandleFunc("/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
-	r.HandleFunc("/token", handlers.TokenHandler)
+	r.HandleFunc("/api/config/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
+	r.HandleFunc("/api/config/token", handlers.TokenHandler)
 
 	// api
 	r.HandleFunc("/api/queue", handlers.QueueHandler).Methods(http.MethodGet)

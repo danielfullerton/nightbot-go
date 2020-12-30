@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
-export class Home extends Component<any, any> {
+interface HomeState {
+  clientId: string;
+  clientSecret: string;
+}
+
+export class Home extends Component<any, HomeState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      clientId: '',
+      clientSecret: ''
+    };
+  }
+
   submitCredentials(skipCredentials?: boolean) {
-    console.log(skipCredentials);
+    const url = '/api/config/credentials' + (skipCredentials ? '?skipCredentials=1' : '');
+    const req = skipCredentials ? { clientId: this.state.clientId, clientSecret: this.state.clientSecret } : {};
+    axios.post(url, req)
+      .then(response => {
+        const redirectUrl = response.data.redirectUrl;
+        window.location.replace(redirectUrl);
+      })
+      .catch(console.error);
   }
 
   render() {
@@ -12,19 +33,41 @@ export class Home extends Component<any, any> {
           <h2>Enter NightBot API Credentials</h2>
           <hr/>
           <div className="row credentials-form">
-            <form>
+            <form onSubmit={event => event.preventDefault()}>
               <div className="form-group">
                 <label htmlFor="clientId">Client ID:</label>
-                <input type="text" className="form-control" id="clientId" aria-describedby="clientId"
-                       placeholder="Enter NightBot Client ID"/>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="clientId"
+                  aria-describedby="clientId"
+                  placeholder="Enter NightBot Client ID"
+                  onChange={e => this.setState({ clientId: e.target.value })}
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="clientSecret">Client Secret:</label>
-                <input type="password" className="form-control" id="clientSecret" aria-describedby="clientSecret"
-                       placeholder="Enter NightBot Client Secret" autoComplete=""/>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="clientSecret"
+                  aria-describedby="clientSecret"
+                  placeholder="Enter NightBot Client Secret"
+                  autoComplete=""
+                  onChange={e => this.setState({ clientSecret: e.target.value })}
+                />
               </div>
-              <button type="button" className="btn btn-primary" onClick={() => this.submitCredentials(true)}>Submit</button>
-              <button className="btn btn-success" onClick={() => this.submitCredentials(true)}>Use Environment Variables
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => this.submitCredentials(true)}
+                disabled={!(this.state.clientId || this.state.clientSecret)}>
+                Submit</button>
+              <button
+                className="btn btn-success"
+                onClick={() => this.submitCredentials(true)}
+                disabled={!!(this.state.clientId || this.state.clientSecret)}>
+                Use Environment Variables
               </button>
             </form>
           </div>

@@ -18,6 +18,10 @@ html, body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    button {
+      margin-right: 20px;
+    }
   }
 
   input {
