@@ -4,3 +4,4 @@ Dockerfile
 .dockerignore
 dist
 node_modules
+main

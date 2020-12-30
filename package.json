@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack --config webpack.config.js"
+    "build:app": "npx webpack --config webpack.config.js",
+    "build:server": "go build cmd/main.go",
+    "build:all": "npm run build:app && npm run build:server"
   },
   "repository": {
     "type": "git",
