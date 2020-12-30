@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'app', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -10,10 +11,36 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "src/index.html"
-    })
+      template: "app/index.html"
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
-  module: {},
+  module: {
+    rules: [
+      {
+        test: /\.(jsx|js)$/,
+        include: path.resolve(__dirname, 'app'),
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env', { targets: "defaults" }
+              ],
+              '@babel/preset-react'
+            ]
+          }
+        }]
+      }
+    ]
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    open: true,
+    clientLogLevel: 'silent',
+    port: 4200
+  },
   resolve: {
     extensions: ['.ts', '.js']
   }
