@@ -1,19 +1,24 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'app', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "app/index.html"
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'app/assets',
+          to: 'assets'
+        }
+      ]
+    })
   ],
   module: {
     rules: [
@@ -43,9 +48,16 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
-    open: true,
+    open: false,
     clientLogLevel: 'silent',
-    port: 4200
+    port: 4200,
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5775',
+        secure: false
+      }
+    }
   },
   resolve: {
     extensions: ['.ts', '.js', '.jsx', '.tsx']

@@ -2,3 +2,35 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.credentials-page {
+  max-width: 700px;
+  min-height: 100vh;
+  background: #ccc;
+  padding: 40px;
+
+  h2 {
+    text-align: center;
+  }
+
+  .credentials-form {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    button {
+      margin-right: 20px;
+    }
+  }
+
+  input {
+    width: 500px;
+  }
+
+  img {
+    width: 400px;
+    display: block;
+    margin: 25px auto;
+  }
+}

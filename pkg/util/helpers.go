@@ -13,7 +13,7 @@ var baseURL = os.Getenv("BASE_URL")
 var port = os.Getenv("PORT")
 
 func GetRedirectURI() string {
-	return fmt.Sprintf("%s:%s/token", baseURL, port)
+	return fmt.Sprintf("%s:%s/api/config/token", baseURL, port)
 }
 
 func GetCloseURI() string {
