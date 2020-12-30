@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'app', 'index.tsx'),
@@ -9,7 +10,15 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'app/assets',
+          to: 'assets'
+        }
+      ]
+    })
   ],
   module: {
     rules: [

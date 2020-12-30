@@ -12,7 +12,7 @@ var r = mux.NewRouter()
 
 func Start() {
 	port := ":" + os.Getenv("PORT")
-	staticFileServer := http.FileServer(http.Dir("./static"))
+	staticFileServer := http.FileServer(http.Dir("./dist/assets"))
 	distFileServer := http.FileServer(http.Dir("./dist"))
 
 	// views
@@ -26,7 +26,7 @@ func Start() {
 	r.HandleFunc("/api/queue", handlers.QueueHandler).Methods(http.MethodGet)
 
 	// static
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", staticFileServer))
+	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", staticFileServer))
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", distFileServer))
 
 	// Serve index page on all unhandled routes
