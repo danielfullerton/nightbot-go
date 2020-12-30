@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles.scss'
-
-if (module.hot) module.hot.accept();
+import { App } from './app.component';
 
 ReactDOM.render(
-  React.createElement('div', null, `Hi there`),
+  <App />,
   document.getElementById('app')
 )
