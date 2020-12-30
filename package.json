@@ -1,0 +1,42 @@
+{
+  "name": "nightbot-go",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:app": "npx webpack --config webpack.config.js",
+    "build:server": "go build cmd/main.go",
+    "build:all": "npm run build:app && npm run build:server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielfullerton/nightbot-go.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielfullerton/nightbot-go/issues"
+  },
+  "homepage": "https://github.com/danielfullerton/nightbot-go#readme",
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.11.1"
+  }
+}

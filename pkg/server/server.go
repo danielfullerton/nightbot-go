@@ -12,13 +12,15 @@ var r = mux.NewRouter()
 
 func Start() {
 	port := ":" + os.Getenv("PORT")
-	fileServer := http.FileServer(http.Dir("./static"))
+	staticFileServer := http.FileServer(http.Dir("./static"))
+	appFileServer := http.FileServer(http.Dir("./dist"))
+
 	// views
-	r.HandleFunc("/", handlers.HtmlHandler("index"))
-	r.HandleFunc("/close", handlers.HtmlHandler("close"))
+	r.HandleFunc("/", handlers.HtmlHandler)
 
 	// static
-	r.PathPrefix("/static").Handler(http.StripPrefix("/static/", fileServer))
+	r.PathPrefix("/").Handler(http.StripPrefix("/", appFileServer))
+	r.PathPrefix("/static").Handler(http.StripPrefix("/static/", staticFileServer))
 
 	// oauth handlers
 	r.HandleFunc("/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
