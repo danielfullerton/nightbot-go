@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+require("@babel/polyfill");
 
 module.exports = {
-  entry: path.resolve(__dirname, 'app', 'index.tsx'),
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'app', 'index.tsx')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -18,6 +20,9 @@ module.exports = {
           to: 'assets'
         }
       ]
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
     })
   ],
   module: {
@@ -52,6 +57,7 @@ module.exports = {
     clientLogLevel: 'silent',
     port: 4200,
     historyApiFallback: true,
+    index: 'index.html',
     proxy: {
       '/api': {
         target: 'http://localhost:5775',

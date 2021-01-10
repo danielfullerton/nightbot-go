@@ -7,7 +7,8 @@
     "build:app": "npx webpack --config webpack.config.js",
     "build:server": "go build cmd/main.go",
     "build:all": "concurrently \"npm run build:app\" \"npm run build:server\"",
-    "start": "npm run build:app && PORT=5775 BASE_URL=http://localhost go run cmd/main.go"
+    "start": "npm run build:app && PORT=5775 BASE_URL=http://localhost go run cmd/main.go",
+    "start:ui": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "webpack": "^5.11.1"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@types/axios": "^0.14.0",
     "@types/react-router-dom": "^5.1.7",
     "copy-webpack-plugin": "^7.0.0",

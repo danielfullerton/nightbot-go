@@ -2,11 +2,8 @@
   "compilerOptions": {
     "target": "esnext",
     "outDir": "./dist/",
-    "strictNullChecks": true,
     "moduleResolution": "node",
-    "allowJs": true,
     "noEmit": true,
-    "strict": true,
     "esModuleInterop": true,
     "jsx": "react",
     "baseUrl": "./src",
@@ -28,6 +25,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "sourceMap": true
   }
 }
