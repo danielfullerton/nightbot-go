@@ -4,6 +4,7 @@ import { Queue } from './components/Queue';
 import { Home } from './components/Home';
 import { Close } from './components/Close';
 import { NowPlaying } from './components/NowPlaying';
+import { Channel } from './components/Channel';
 
 export class App extends Component<any, any> {
   render() {
@@ -12,6 +13,9 @@ export class App extends Component<any, any> {
         <Switch>
           <Route exact path="/queue">
             <Queue />
+          </Route>
+          <Route exact path="/channel">
+            <Channel />
           </Route>
           <Route exact path="/now-playing">
             <NowPlaying />
