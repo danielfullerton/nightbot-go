@@ -2,9 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+require("@babel/polyfill");
 
 module.exports = {
-  entry: path.resolve(__dirname, 'app', 'index.tsx'),
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'app', 'index.tsx')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
