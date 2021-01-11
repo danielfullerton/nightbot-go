@@ -8,7 +8,8 @@
     "build:server": "go build cmd/main.go",
     "build:all": "concurrently \"npm run build:app\" \"npm run build:server\"",
     "start": "npm run build:app && PORT=5775 BASE_URL=http://localhost go run cmd/main.go",
-    "start:ui": "webpack-dev-server"
+    "start:ui": "webpack-dev-server",
+    "start:server": "go run cmd/main.go"
   },
   "repository": {
     "type": "git",
