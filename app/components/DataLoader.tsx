@@ -10,10 +10,8 @@ export const DataLoader = ({ children }: any) => {
     setInterval(async () => {
       if (!state.lock) {
         setState({ lock: true });
-        await Promise.all([
-          FetchQueue(dispatch),
-          FetchChannel(dispatch),
-        ]);
+        await FetchQueue(dispatch);
+        await FetchChannel(dispatch);
         setState({ lock: false });
       }
     }, 3000);
