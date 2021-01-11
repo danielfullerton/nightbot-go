@@ -11,7 +11,7 @@ and modular/scalable. I decided to write an application that integrates with Nig
 queue and current song in a widget, which could then be rendered on a streaming tool such as OBS.
 ### Goals of the project
 - Build an application that balances ease of use with modularity and customization.
-- Provide as many integrations as possible with NightBot, enabling the creation of widgets to present the data of these integrations via web views.
+- Provide as many integrations as possible with NightBot, enabling the creation of widgets to present the data of these integrations via a web view(s).
 - Make the application portable, with the ability to use it in a Docker container, on a local machine, on a hosted web server, or a Raspberry Pi. Any device
 that can run web technologies can serve up the application.
 ### Example High-Level Usage Overview
@@ -20,7 +20,7 @@ An example of how you may use this application would be:
 2. Add a custom widget to pull your NightBot queue data and render it in a React component.
 3. Start the app and connect it to your NightBot account.
 4. Add a Browser source to OBS and point it to the endpoint that exposes your custom widget.
-5. Now you have a rendered view of your NightBot queue in your stream!
+5. Now you have a rendered view of your NightBot data in your stream!
 # Installation
 ### Prerequisites
 The following tools/dependencies are required in order to use this app:
@@ -125,15 +125,26 @@ In theory, you could this application without ever integrating with NightBot jus
 with many static widgets, or widgets that pull data from external APIs. However, that is not the intended scope of this
 project.
 ### How a Widget Works
-All widgets belong to the direction **/app/components/**, and each is a .tsx file representing a React component. The
-standard practice is for each of these components to map to a different route, defined in **/app/app.component.tsx**. Then,
+There are two potential ways to use widgets.
+#### Single Overlay
+This is the recommended usage. Using this pattern, there is a single React component; let's call it **overlay.ts**. Because this
+app fetches all data and exposes it globally within the UI, you can use a single React component to consume and render all of it.
+This widget will be added to a route within the React app, and will serve as the entire overlay. Your streaming app, for example
+OBS, can point to this URL and render the overlay over the entire stream window.
+<br><br>
+For example, we may have a widget called **Overlay.tsx**, which we place on a route called **/overlay**. You could then
+create a Browser source in OBS that points to **http://localhost:5775/overlay**, and this overlay widget would be rendered in
+your stream window.
+#### One Overlay Per Widget
+Using this pattern, all widgets would belong to the direction **/app/components/**, and each is a .tsx file representing a React component. 
+The standard practice is for each of these components to map to a different route, defined in **/app/app.component.tsx**. Then,
 your streaming tool (for example, [OBS](https://obsproject.com/)) will point to each of these widget URLs separately to
 render them.
 <br><br>
 For example, we may have a widget called **HelloWorld.tsx**, which we place on a route called **/hello-world**. You could then
 create a Browser source in OBS that points to **http://localhost:5775/hello-world**, and this widget would be rendered in
 your stream window.
-### Creating a Custom Widget
+##### Creating a Custom Widget (Only for One Overlay per Widget Pattern)
 In order to create a custom widget, you will need some basic experience with the JavaScript framework [React](https://reactjs.org/).
 First, create a new React component in the **/app/components** folder, and add this component to the routes list in **/app/app.component.tsx**
 (See the existing placeholder widgets *NowPlaying* and *Queue* for examples of how to do this). From there, you can
