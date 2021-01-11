@@ -1,12 +1,21 @@
-import React from 'react';
-import { createContext, useReducer } from 'react';
+import React, { createContext, Dispatch, useCallback, useReducer } from 'react';
 import { Channel } from './types/Channel';
 import { Queue, Song } from './types/Queue';
 
-interface GlobalState {
+export interface GlobalState {
   channel: Channel;
   currentSong: Song;
   queue: Queue;
+}
+
+export interface GlobalAction {
+  type: string;
+  payload: any;
+}
+
+export interface GlobalContext {
+  state: GlobalState;
+  dispatch: Dispatch<GlobalAction>;
 }
 
 const initialState: GlobalState = {
@@ -15,12 +24,14 @@ const initialState: GlobalState = {
   queue: []
 };
 
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext({} as GlobalContext);
 
 export const Store = ({ children }: any) => {
-  const [state, dispatch] = useReducer(() => {
-    return null;
-  }, initialState);
+  const memoizedReducer = useCallback((prevState: GlobalState, action: GlobalAction) => {
+    console.log(action.type);
+    return { ...prevState };
+  }, []);
+  const [state, dispatch] = useReducer(memoizedReducer, initialState);
   return (
     <GlobalContext.Provider value={{state, dispatch}}>
       {children}

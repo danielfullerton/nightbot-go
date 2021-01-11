@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Channel, ChannelResponse } from '../types/Channel';
+import { Channel } from '../types/Channel';
 
 interface ChannelState {
   channel: Channel;
@@ -8,33 +7,33 @@ interface ChannelState {
 }
 
 export class ChannelComponent extends Component<any, ChannelState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      channel: null,
-      lock: false
-    };
-  }
-
-  async fetchChannel(): Promise<void> {
-    if (!this.state.lock) {
-      this.setState({ lock: true });
-      const resp = await axios.get<ChannelResponse>('/api/channel');
-      const { channel } = resp.data;
-      this.setState({ channel: channel, lock: false });
-    }
-  }
-
-  componentDidMount() {
-    setInterval(async () => {
-      await this.fetchChannel();
-    }, 3000);
-  }
+  // constructor(props: any) {
+  //   super(props);
+  //   this.state = {
+  //     channel: null,
+  //     lock: false
+  //   };
+  // }
+  //
+  // async fetchChannel(): Promise<void> {
+  //   if (!this.state.lock) {
+  //     this.setState({ lock: true });
+  //     const resp = await axios.get<ChannelResponse>('/api/channel');
+  //     const { channel } = resp.data;
+  //     this.setState({ channel: channel, lock: false });
+  //   }
+  // }
+  //
+  // componentDidMount() {
+  //   setInterval(async () => {
+  //     await this.fetchChannel();
+  //   }, 3000);
+  // }
 
   render() {
     return (
       <div>
-        {this.state.channel?.displayName}
+        Hello world
       </div>
     );
   }
