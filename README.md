@@ -115,6 +115,9 @@ $ CLIENT_ID=******* CLIENT_SECRET=******* npm start
 This is convenient if you are starting the app from another build or container process, such as [Docker](https://www.docker.com/). If you
 use this method of setting your credentials, you will simply need to navigate to the app's [home page](http://localhost:5775) and click the
 green **Use Environment Variables** button.
+<br><br>
+Alternatively, you can simply navigate to the [authorize URL](http://localhost:5775/authorize) and it will auto-redirect you to
+the NightBot authorization page.
 
 ## Using Widgets
 This application is written so that you can write your own widgets using React. These can either be static widgets,

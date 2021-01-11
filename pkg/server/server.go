@@ -18,11 +18,12 @@ func Start() {
 	// oauth handlers
 	r.HandleFunc("/api/config/credentials", handlers.StoreCredentialsHandler).Methods(http.MethodPost)
 	r.HandleFunc("/api/config/token", handlers.TokenHandler)
+	r.HandleFunc("/authorize", handlers.ManualAuthHandler)
 
 	// api
 	r.HandleFunc("/api/queue", handlers.QueueHandler).Methods(http.MethodGet)
 	r.HandleFunc("/api/channel", handlers.ChannelHandler).Methods(http.MethodGet)
-	
+
 	// static
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", staticFileServer))
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", distFileServer))
